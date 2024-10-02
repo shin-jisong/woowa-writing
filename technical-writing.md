@@ -30,7 +30,8 @@
 
  저의 상황에서는 인바운드 보안 설정으로 그림과 같이 80 포트, 443 포트, 특정 IP에 대한 22 포트를 허용해 준 상태입니다. 이러한 인바운드 보안 설정으로 인하여 spring 서버가 설정되어 있는 8080 포트로 요청을 전달해 주기 위해서는 **포트 포워딩이 필요**합니다.
 
-![image](https://github.com/user-attachments/assets/49577e9d-c1b6-45f4-8b73-029ecf57b7fd)
+![image](https://github.com/user-attachments/assets/aaf9f4bb-ca2a-4894-9f80-56981a155d4b)
+
 
 
 포트 포워딩을 하기 위해서는 대표적으로 OSI 7계층에서 동작하는 **Nginx**와 OSI 3계층과 4계층에 걸쳐 동작하는 **iptable**을 활용하는 방법이 있습니다. 아래 단락에서 좀 더 상세히 해당 방법들을 알아 보도록 하겠습니다.
@@ -39,7 +40,8 @@
 
 ### **iptable 포트 포워딩**
 
-![image](https://github.com/user-attachments/assets/5ef51b0c-c179-44e7-ab20-2b6599b5bf36)
+![image](https://github.com/user-attachments/assets/311be996-aa65-473e-8665-945c25790a8c)
+
 
 **iptable**은 규칙 집합을 정의할 수 있는 일반 방화벽 소프트웨어입니다. 리눅스 커널의 네트워크 스텍에 내장된 프레임 워크인 netfilter의 기능을 활용하는 인터페이스로 동작합니다.  iptable는 네트워크 패킷을 필터링하고 포트나 IP 주소를 변경하는 데 활용됩니다. 포트 포워딩을 설정하기 위해서는 다음과 같은 명령어를 사용할 수 있습니다.
 
@@ -65,12 +67,14 @@ NAT는 주로 두 가지 방식으로 작동합니다. 첫 번째는 **Static NA
 NAT의 이러한 다양한 작동 방식은 네트워크의 요구사항과 구성에 따라 적절히 선택될 수 있으며, 서버 개발자는 이를 이해함으로써 더 효과적인 네트워크 설계 및 관리가 가능합니다.
 
 ### **Nginx 포트 포워딩**
-![image](https://github.com/user-attachments/assets/0f387cda-e6cb-4033-9728-3fcb94ad8d27)
+![image](https://github.com/user-attachments/assets/9c0327da-1d86-4a58-9700-30b7dd6e48ba)
+
 
 
 **NginX**는 웹 서버 소프트웨어입니다. 주로 HTTP 서버, 리버스 프록시 서버, 로드 밸런서 등으로 사용합니다. NginX에서 포트 포워딩을 적용하기 위해서는 `nginx.conf` 파일에 리버스 프록시 설정을 추가해야 합니다. 예를 들어, 외부에서 80번 포트로 들어오는 요청을 내부의 8080번 포트로 전달하려면 다음과 같은 설정을 추가할 수 있습니다:
 
-![image](https://github.com/user-attachments/assets/2e752123-8ef4-489c-808c-e52025a834ad)
+![image](https://github.com/user-attachments/assets/15f2f3d1-74b5-4c2b-8a6b-c734eaa076ef)
+
 
 
 이 설정을 통해 NginX는 클라이언트의 요청을 내부 서버의 8080번 포트로 전달하여 처리합니다.
